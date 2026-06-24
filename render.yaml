@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: jewelartix
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: jewelartix-db
+          property: connectionString
+
+databases:
+  - name: jewelartix-db
+    databaseName: jewelartix
+    user: jewelartix
